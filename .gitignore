@@ -1,0 +1,18 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+venv/
+env/
+ENV/
+
+# 数据、模型（不上传）
+data/raw/
+data/processed/
+models/checkpoints/
+models/logs/
+
+# 其他
+*.log
+.DS_Store
