@@ -137,51 +137,47 @@ const registerRules = {
   ]
 }
 
-const API_BASE = 'http://localhost:8000/api'
+const API_BASE = '/api'
 
-// 登录
 async function handleLogin() {
   if (!loginFormRef.value) return
-  await loginFormRef.value.validate(async (valid) => {
-    if (valid) {
-      loginLoading.value = true
-      try {
-        const response = await axios.post(`${API_BASE}/auth/login`, loginForm.value)
-        localStorage.setItem('token', response.data.access_token)
-        localStorage.setItem('username', response.data.username)
-        ElMessage.success('登录成功')
-        router.push('/')
-      } catch (error) {
-        ElMessage.error(error.response?.data?.detail || '登录失败')
-      } finally {
-        loginLoading.value = false
-      }
+  try {
+    await loginFormRef.value.validate()
+    loginLoading.value = true
+    const response = await axios.post(`${API_BASE}/auth/login`, loginForm.value)
+    localStorage.setItem('token', response.data.access_token)
+    localStorage.setItem('username', response.data.username)
+    ElMessage.success('登录成功')
+    router.push('/')
+  } catch (error) {
+    if (error.response) {
+      ElMessage.error(error.response?.data?.detail || '登录失败')
     }
-  })
+  } finally {
+    loginLoading.value = false
+  }
 }
 
-// 注册
 async function handleRegister() {
   if (!registerFormRef.value) return
-  await registerFormRef.value.validate(async (valid) => {
-    if (valid) {
-      registerLoading.value = true
-      try {
-        await axios.post(`${API_BASE}/auth/register`, {
-          username: registerForm.value.username,
-          password: registerForm.value.password,
-          email: registerForm.value.email
-        })
-        ElMessage.success('注册成功，请登录')
-        activeTab.value = 'login'
-        loginForm.value = { username: registerForm.value.username, password: '' }
-      } catch (error) {
-        ElMessage.error(error.response?.data?.detail || '注册失败')
-      } finally {
-        registerLoading.value = false
-      }
+  try {
+    await registerFormRef.value.validate()
+    registerLoading.value = true
+    await axios.post(`${API_BASE}/auth/register`, {
+      username: registerForm.value.username,
+      password: registerForm.value.password,
+      email: registerForm.value.email
+    })
+    ElMessage.success('注册成功，请登录')
+    activeTab.value = 'login'
+    loginForm.value = { username: registerForm.value.username, password: '' }
+  } catch (error) {
+    if (error.response) {
+      ElMessage.error(error.response?.data?.detail || '注册失败')
     }
-  })
+  } finally {
+    registerLoading.value = false
+  }
 }
 </script>
 

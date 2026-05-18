@@ -101,8 +101,10 @@ const pageSize = ref(10)
 const total = ref(0)
 
 // API 配置
+const API_BASE = '/api'
+
 const api = axios.create({
-  baseURL: 'http://localhost:8000/api',
+  baseURL: API_BASE,
   headers: {
     'Authorization': `Bearer ${localStorage.getItem('token')}`
   }

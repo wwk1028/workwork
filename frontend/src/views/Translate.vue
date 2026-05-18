@@ -155,8 +155,10 @@ const showAddTerm = ref(false)
 const newTerm = ref({ source_term: '', target_term: '' })
 
 // API 配置
+const API_BASE = '/api'
+
 const api = axios.create({
-  baseURL: 'http://localhost:8000/api',
+  baseURL: API_BASE,
   headers: {
     'Authorization': `Bearer ${localStorage.getItem('token')}`
   }
