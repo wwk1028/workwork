@@ -1,18 +1,64 @@
-# Python
+# ===== Python =====
 __pycache__/
-*.pyc
+*.py[cod]
 *.pyo
-*.pyd
+*.egg-info/
+dist/
+build/
+*.egg
+.eggs/
+*.so
 venv/
+.venv/
 env/
-ENV/
+pip-log.txt
+pip-delete-this-directory.txt
 
-# 数据、模型（不上传）
-data/raw/
-data/processed/
-models/checkpoints/
-models/logs/
+# ===== Environment & Secrets =====
+.env
+*.env.local
+*.env.*.local
 
-# 其他
-*.log
+# ===== Node.js (Frontend) =====
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+.next/
+dist/
+
+# ===== IDE & Editor =====
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
 .DS_Store
+Thumbs.db
+
+# ===== Docker =====
+.docker/
+
+# ===== Model & Data (large files) =====
+opus_en2zh/
+opus_finetuned_full/
+data/
+train/
+uploads/
+
+# ===== Archives =====
+*.zip
+*.tar.gz
+*.rar
+archive_*/
+
+# ===== Test & Debug Outputs =====
+debug_bleu.txt
+test_en2zh_output.txt
+test_zh2en_output.txt
+benchmark_report_quick.json
+*.log
+
+# ===== OS Generated =====
+Desktop.ini
